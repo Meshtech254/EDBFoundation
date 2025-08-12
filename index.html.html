@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDB Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #f97316;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.1;
+        }
+
+        header img {
+            max-width: 120px;
+            height: auto;
+            margin: 0 auto 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        nav {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        section {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        form {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--secondary);
+        }
+
+        .donate-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feedback-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--success);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="edb-logo.png" alt="EDB Foundation logo" style="max-width: 160px; margin-bottom: 1rem;">
+        <h1>Everyone Deserves Better Foundation</h1>
+        <p>Creating Hope, Changing Lives</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#about">About</a>
+            <a href="#vision">Vision</a>
+            <a href="#mission">Mission</a>
+            <a href="#programs">Programs</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Us</h2>
+            <p>EDB Foundation is a youth-led nonprofit organization in Kenya, focused on empowering communities through education, mental health support, and gender equality.</p>
+        </section>
+
+        <section id="vision">
+            <h2>Our Vision</h2>
+            <p>A society where everyone, regardless of background or gender, has access to equal opportunities and a better future.</p>
+        </section>
+
+        <section id="mission">
+            <h2>Our Mission</h2>
+            <p>To empower individuals and communities through mental health awareness, education, gender equality, and youth development initiatives. We work collaboratively to foster hope and sustainable change.</p>
+        </section>
+
+        <section id="programs">
+            <h2>What We Do</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Mental Health Outreach</h3>
+                    <p>Promoting mental wellness and breaking stigma through school visits, forums, and online campaigns.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Educational Empowerment</h3>
+                    <p>Supporting access to education for vulnerable youth and offering mentorship programs.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Gender Equality</h3>
+                    <p>Advocating for women's and girls' rights, menstrual health, and safety.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Youth Empowerment</h3>
+                    <p>Leadership training, life skills, and civic engagement opportunities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="volunteer">
+            <h2>Volunteer With Us</h2>
+            <p>Be part of the movement. Sign up to volunteer and help us create lasting change!</p>
+            <form action="https://formspree.io/f/xdkgrpwn" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Why do you want to volunteer?</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="donate">
+            <h2>Support Our Work</h2>
+            <p>Your contribution helps us reach more communities, empower more youth, and change more lives. Every donation counts.</p>
+            <a class="donate-btn" href="https://www.paypal.com/donate/?hosted_button_id=RZAKT64773LWL" target="_blank">Donate Now</a>
+        </section>
+
+        <section id="community-feedback">
+            <h2>Community Feedback</h2>
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <p>"EDB Foundation changed how I see community work. Truly inspiring!"</p>
+                    <span>– Jane W., Volunteer</span>
+                </div>
+                <div class="feedback-card">
+                    <p>"The Better Begins With Us campaign gave our youth a voice. Thank you EDB!"</p>
+                    <span>– Michael O., Community Leader</span>
+                </div>
+                <div class="feedback-card">
+                    <p>"I'm proud to be part of a movement that actually cares about change."</p>
+                    <span>– Amina K., Donor</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <p>Moments from our community outreach, campaigns, and events.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/photo1.jpg" alt="Campaign 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo2.jpg" alt="Campaign 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo3.jpg" alt="Campaign 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo4.jpg" alt="Campaign 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo5.jpg" alt="Campaign 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo6.jpg" alt="Campaign 6">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <div class="social-links">
+                <a href="mailto:info.edbfoundation@gmail.com">Email</a>
+                <a href="tel:+254738641078">Phone</a>
+                <a href="https://instagram.com/edbfoundation" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61575808226760" target="_blank">Facebook</a>
+                <a href="https://www.tiktok.com/@edb.foundation" target="_blank">TikTok</a>
+            </div>
+            <div style="margin-top: 1.5rem; font-size: 1.1rem;">
+                <p>Email: <a href="mailto:info.edbfoundation@gmail.com">info.edbfoundation@gmail.com</a></p>
+                <p>Phone/Whatsapp: <a href="tel:+254738641078">+254738641078</a></p>
+                <p>Instagram: <a href="https://instagram.com/edbfoundation" target="_blank">EDB Foundation</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61575808226760" target="_blank">EDB Foundation</a></p>
+                <p>TikTok: <a href="https://www.tiktok.com/@edb.foundation" target="_blank">@edb.foundation</a></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Everyone Deserves Better Foundation. All rights reserved</p>
+    </footer>
+
+    <script>
+        // Form submission handling
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        form.innerHTML = "<p style='color: var(--success);'>Thank you for your submission! We'll be in touch soon.</p>";
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                } catch (error) {
+                    form.innerHTML = "<p style='color: var(--accent);'>Oops! Something went wrong. Please try again.</p>";
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
